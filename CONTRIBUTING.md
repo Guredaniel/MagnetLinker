@@ -30,13 +30,21 @@ python -m pip install -r requirements-macos.txt
 
 ## Tests
 
-Run the available tests from the repository root:
+On macOS, install the test dependencies and run the suite from the repository root:
 
 ```bash
-python -m pytest -q Tests-Mac
+python -m pip install -e ".[test,macos]"
+python -m pytest -q
 ```
 
 Some tests cover macOS-specific UI behavior. Please mention your operating system and the test command you ran in your pull request.
+
+## Project layout
+
+- Application code and packaged icons: `src/magnetlinker/`
+- Automated tests: `tests/`
+- Project documentation: `docs/`
+- Build scripts: `scripts/`
 
 ## Pull requests
 

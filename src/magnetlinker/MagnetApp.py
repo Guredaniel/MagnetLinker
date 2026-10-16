@@ -7,9 +7,9 @@ import logging
 
 from customtkinter import CTk
 
-from CacheManager import CacheManager
-from APIClient import APIClient
-from GUIManager import GUIManager
+from magnetlinker.CacheManager import CacheManager
+from magnetlinker.APIClient import APIClient
+from magnetlinker.GUIManager import GUIManager
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -23,7 +23,7 @@ def main() -> None:
     if sys.platform == "darwin":
         # Use native macOS GUI with rumps menu bar
         try:
-            from MacOSGUIManager import MacOSGUIManager
+            from magnetlinker.MacOSGUIManager import MacOSGUIManager
 
             gui_manager = MacOSGUIManager(cache_manager, api_client)
             gui_manager.run()

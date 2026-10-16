@@ -55,7 +55,7 @@ In PowerShell, from the repository root:
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
-python MagnetApp.py
+python -m magnetlinker
 ```
 
 ### macOS
@@ -66,7 +66,7 @@ In Terminal, from the repository root:
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements-macos.txt
-python MagnetApp.py
+python -m magnetlinker
 ```
 
 The macOS app uses a native menu bar interface when its macOS dependencies are installed. Otherwise, the entry point falls back to the cross-platform interface.
@@ -88,37 +88,42 @@ The GitHub Actions workflows build on their respective operating systems and upl
 - [Windows workflow](.github/workflows/build-windows.yml)
 - [macOS workflow](.github/workflows/build-macos.yml)
 
-To build locally, install the platform requirements above and run:
-
-```bash
-python -m PyInstaller --noconfirm --clean --onefile --windowed \
-  --name MagnetLinker --icon icon.png --collect-all customtkinter \
-  --add-data "icon.png;." MagnetApp.py
-```
-
-On Windows, PyInstaller uses `;` to separate bundled data paths:
+To build locally on Windows, install the platform requirements above and run:
 
 ```powershell
 python -m PyInstaller --noconfirm --clean --onefile --windowed `
-  --name MagnetLinker --icon icon.png --collect-all customtkinter `
-  --add-data "icon.png;." MagnetApp.py
+  --paths src --name MagnetLinker --icon src/magnetlinker/assets/icon.png `
+  --collect-all customtkinter `
+  --add-data "src/magnetlinker/assets/icon.png;magnetlinker/assets" `
+  src/magnetlinker/MagnetApp.py
 ```
 
-On macOS, use the provided spec file:
+On macOS, run the build script from any directory:
 
 ```bash
-python -m PyInstaller --noconfirm --clean MagnetLinker.spec
+bash scripts/build_macos_app.sh
 ```
 
 ## Tests
 
-Install the platform requirements, then run the test suite from the repository root:
+On macOS, install the test dependencies and run the suite from the repository root:
 
 ```bash
-python -m pytest -q Tests-Mac
+python -m pip install -e ".[test,macos]"
+python -m pytest -q
 ```
 
 Some tests exercise macOS-specific UI behavior. The GitHub Actions workflows currently validate application packaging; they do not run the test suite.
+
+## Project layout
+
+```text
+src/magnetlinker/   Application package and packaged artwork
+tests/              Automated tests and test runner
+docs/               Project and test documentation
+scripts/            Local build helpers
+.github/workflows/  Build and release automation
+```
 
 ## Settings and credentials
 

@@ -2,7 +2,7 @@
 """Test that the crash has been fixed."""
 
 from unittest.mock import Mock
-from MacOSGUIManager import MacOSGUIManager
+from magnetlinker.MacOSGUIManager import MacOSGUIManager
 
 # Create mock objects
 mock_cache = Mock()

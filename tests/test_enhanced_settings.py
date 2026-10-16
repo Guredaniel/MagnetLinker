@@ -5,9 +5,9 @@ Test the enhanced macOS settings interface with visual improvements.
 
 from unittest.mock import Mock
 
-from MacOSGUIManager import MacOSGUIManager
-from CacheManager import CacheManager
-from APIClient import APIClient
+from magnetlinker.MacOSGUIManager import MacOSGUIManager
+from magnetlinker.CacheManager import CacheManager
+from magnetlinker.APIClient import APIClient
 
 
 class FakeToggleField:

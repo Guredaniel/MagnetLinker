@@ -8,12 +8,12 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # Ensure project root is on sys.path dynamically
-project_root = Path(__file__).resolve().parent
+project_root = Path(__file__).resolve().parents[1] / "src"
 sys.path.insert(0, str(project_root))
 
-from MacOSGUIManager import MacOSGUIManager
-from CacheManager import CacheManager
-from APIClient import APIClient
+from magnetlinker.MacOSGUIManager import MacOSGUIManager
+from magnetlinker.CacheManager import CacheManager
+from magnetlinker.APIClient import APIClient
 
 
 class TestMagnetLinkProcessing(unittest.TestCase):
@@ -289,10 +289,10 @@ class TestDialogs(unittest.TestCase):
         pass_field.stringValue.return_value = "pass"
 
         # Patch field constructors
-        with patch("MacOSGUIManager.NSTextField") as mock_text_cls, \
-             patch("MacOSGUIManager.NSSecureTextField") as mock_secure_cls, \
-             patch("MacOSGUIManager.NSAlert") as mock_alert_cls, \
-             patch("MacOSGUIManager.NSApp") as mock_nsapp:
+        with patch("magnetlinker.MacOSGUIManager.NSTextField") as mock_text_cls, \
+             patch("magnetlinker.MacOSGUIManager.NSSecureTextField") as mock_secure_cls, \
+             patch("magnetlinker.MacOSGUIManager.NSAlert") as mock_alert_cls, \
+             patch("magnetlinker.MacOSGUIManager.NSApp") as mock_nsapp:
             mock_text_cls.alloc.return_value.initWithFrame_.return_value = user_field
             mock_secure_cls.alloc.return_value.initWithFrame_.return_value = pass_field
 
@@ -324,9 +324,9 @@ class TestDialogs(unittest.TestCase):
         file_url.path.return_value = "/tmp/test.torrent"
         panel.URLs.return_value = [file_url]
         panel.runModal.return_value = MacOSGUIManager.NSFileHandlingPanelOKButton
-        with patch("MacOSGUIManager.NSOpenPanel") as mock_open, \
-             patch("MacOSGUIManager.NSAlert") as mock_alert_cls, \
-             patch("MacOSGUIManager.NSApp") as mock_nsapp:
+        with patch("magnetlinker.MacOSGUIManager.NSOpenPanel") as mock_open, \
+             patch("magnetlinker.MacOSGUIManager.NSAlert") as mock_alert_cls, \
+             patch("magnetlinker.MacOSGUIManager.NSApp") as mock_nsapp:
             mock_open.openPanel.return_value = panel
             # alert for content type
             alert_inst = Mock()

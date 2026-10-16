@@ -12,35 +12,34 @@ def run_test_suite(test_file, suite_name):
     print(f"  {suite_name}")
     print(f"{'='*70}\n")
     
-    # run tests with cwd set to project root directory dynamically
-    project_root = Path(__file__).resolve().parent
+    project_root = Path(__file__).resolve().parents[1]
     env = os.environ.copy()
-    # ensure project modules are importable
-    env_py = env.get("PYTHONPATH", "")
-    if env_py:
-        env["PYTHONPATH"] = str(project_root) + ":" + env_py
-    else:
-        env["PYTHONPATH"] = str(project_root)
-    result = subprocess.run([sys.executable, test_file], cwd=str(project_root), env=env)
+    source_path = str(project_root / "src")
+    env_py = env.get("PYTHONPATH")
+    env["PYTHONPATH"] = os.pathsep.join(
+        part for part in (source_path, env_py) if part
+    )
+    result = subprocess.run(
+        [sys.executable, test_file], cwd=str(project_root), env=env
+    )
     return result.returncode == 0
 
 
 def main():
     """Run all test suites."""
-    # ensure project root is known
-    project_root = Path(__file__).resolve().parent
+    project_root = Path(__file__).resolve().parents[1]
     print("\n" + "="*70)
     print("  MAGNETLINKER - COMPREHENSIVE TEST SUITE")
     print("="*70)
     
     # Tests are located relative to the project root.
     test_suites = [
-        (str(project_root / "Tests-Mac" / "test_comprehensive.py"), "1. Core Features Tests (23 tests)"),
-        (str(project_root / "Tests-Mac" / "test_ui_integration.py"), "2. UI & Integration Tests (18 tests)"),
-        (str(project_root / "Tests-Mac" / "test_cache_manager.py"), "3. Cache Manager Tests (40+ tests)"),
-        (str(project_root / "Tests-Mac" / "test_api_client.py"), "4. API Client Tests (25+ tests)"),
-        (str(project_root / "Tests-Mac" / "test_validation_edge_cases.py"), "5. Validation & Edge Cases (30+ tests)"),
-        (str(project_root / "Tests-Mac" / "test_advanced_features.py"), "6. Advanced Features Tests (35+ tests)"),
+        (str(project_root / "tests" / "test_comprehensive.py"), "1. Core Features Tests (23 tests)"),
+        (str(project_root / "tests" / "test_ui_integration.py"), "2. UI & Integration Tests (18 tests)"),
+        (str(project_root / "tests" / "test_cache_manager.py"), "3. Cache Manager Tests (40+ tests)"),
+        (str(project_root / "tests" / "test_api_client.py"), "4. API Client Tests (25+ tests)"),
+        (str(project_root / "tests" / "test_validation_edge_cases.py"), "5. Validation & Edge Cases (30+ tests)"),
+        (str(project_root / "tests" / "test_advanced_features.py"), "6. Advanced Features Tests (35+ tests)"),
     ]
     
     results = {}

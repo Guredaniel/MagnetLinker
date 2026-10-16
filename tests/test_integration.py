@@ -8,7 +8,7 @@ from AppKit import NSPasteboard, NSPasteboardTypeString, NSString
 
 # Add the project to path
 from pathlib import Path
-project_root = Path(__file__).resolve().parent
+project_root = Path(__file__).resolve().parents[1] / "src"
 sys.path.insert(0, str(project_root))
 
 def copy_to_clipboard(text):
@@ -20,9 +20,9 @@ def copy_to_clipboard(text):
 
 def test_clipboard_detection():
     """Test the clipboard detection."""
-    from CacheManager import CacheManager
-    from APIClient import APIClient
-    from MacOSGUIManager import MacOSGUIManager
+    from magnetlinker.CacheManager import CacheManager
+    from magnetlinker.APIClient import APIClient
+    from magnetlinker.MacOSGUIManager import MacOSGUIManager
     
     print("[TEST] Starting clipboard detection test...")
     

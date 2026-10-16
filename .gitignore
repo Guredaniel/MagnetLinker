@@ -373,3 +373,4 @@ build/
 dist/
 .pytest_cache/
 .vscode/
+*.egg-info/

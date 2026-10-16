@@ -29,7 +29,7 @@ jobs:
       - name: Build MagnetLinker
         run: >-
           python -m PyInstaller --noconfirm --clean
-          --distpath dist --workpath build MagnetLinker.spec
+          --distpath dist --workpath build src/magnetlinker/MagnetLinker.spec
 
       - name: Create DMG
         run: hdiutil create -volname MagnetLinker -srcfolder dist/MagnetLinker.app -ov -format UDZO dist/MagnetLinker.dmg

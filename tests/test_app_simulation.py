@@ -7,14 +7,14 @@ import threading
 from AppKit import NSPasteboard, NSPasteboardTypeString, NSString
 
 from pathlib import Path
-project_root = Path(__file__).resolve().parent
+project_root = Path(__file__).resolve().parents[1] / "src"
 sys.path.insert(0, str(project_root))
 
 def simulate_app_flow():
     """Simulate the app initialization and magnet detection."""
-    from CacheManager import CacheManager
-    from APIClient import APIClient
-    from MacOSGUIManager import MacOSGUIManager
+    from magnetlinker.CacheManager import CacheManager
+    from magnetlinker.APIClient import APIClient
+    from magnetlinker.MacOSGUIManager import MacOSGUIManager
     
     print("[TEST] Starting app simulation...")
     print("[TEST] Creating managers...")

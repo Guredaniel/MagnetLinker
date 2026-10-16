@@ -3,12 +3,12 @@
 
 import sys
 from pathlib import Path
-project_root = Path(__file__).resolve().parent
+project_root = Path(__file__).resolve().parents[1] / "src"
 sys.path.insert(0, str(project_root))
 
-from CacheManager import CacheManager
-from APIClient import APIClient
-from MacOSGUIManager import MacOSGUIManager
+from magnetlinker.CacheManager import CacheManager
+from magnetlinker.APIClient import APIClient
+from magnetlinker.MacOSGUIManager import MacOSGUIManager
 
 def test_sites_tab():
     """Test the Sites tab creation and settings."""

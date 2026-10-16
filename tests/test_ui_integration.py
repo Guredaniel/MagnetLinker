@@ -7,12 +7,12 @@ from unittest.mock import Mock, patch, MagicMock
 
 # Add parent directory to path
 from pathlib import Path
-project_root = Path(__file__).resolve().parent
+project_root = Path(__file__).resolve().parents[1] / "src"
 sys.path.insert(0, str(project_root))
 
-from MacOSGUIManager import MacOSGUIManager
-from CacheManager import CacheManager
-from APIClient import APIClient
+from magnetlinker.MacOSGUIManager import MacOSGUIManager
+from magnetlinker.CacheManager import CacheManager
+from magnetlinker.APIClient import APIClient
 
 
 class TestSettingsSave(unittest.TestCase):

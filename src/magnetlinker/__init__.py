@@ -1,0 +1,1 @@
+"""MagnetLinker desktop application."""

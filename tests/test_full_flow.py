@@ -7,7 +7,7 @@ import threading
 import queue
 
 from pathlib import Path
-project_root = Path(__file__).resolve().parent
+project_root = Path(__file__).resolve().parents[1] / "src"
 sys.path.insert(0, str(project_root))
 
 from AppKit import NSPasteboard, NSPasteboardTypeString, NSString
@@ -52,9 +52,9 @@ def test_queue_processing():
 
 def test_clipboard_detection():
     """Test clipboard detection."""
-    from CacheManager import CacheManager
-    from APIClient import APIClient
-    from MacOSGUIManager import MacOSGUIManager
+    from magnetlinker.CacheManager import CacheManager
+    from magnetlinker.APIClient import APIClient
+    from magnetlinker.MacOSGUIManager import MacOSGUIManager
     
     print("\n[TEST] Initializing MacOSGUIManager...")
     cache_manager = CacheManager()

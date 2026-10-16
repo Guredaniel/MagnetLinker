@@ -29,10 +29,10 @@ jobs:
       - name: Build MagnetLinker
         run: >-
           python -m PyInstaller --noconfirm --clean --onefile --windowed
-          --name MagnetLinker --icon icon.png
+          --paths src --name MagnetLinker --icon src/magnetlinker/assets/icon.png
           --collect-all customtkinter
-          --add-data "icon.png;."
-          MagnetApp.py
+          --add-data "src/magnetlinker/assets/icon.png;magnetlinker/assets"
+          src/magnetlinker/MagnetApp.py
 
       - name: Upload MagnetLinker
         uses: actions/upload-artifact@v4

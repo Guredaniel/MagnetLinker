@@ -10,10 +10,10 @@ from unittest.mock import Mock, patch, MagicMock
 from pathlib import Path
 
 # Ensure project root is on sys.path
-project_root = Path(__file__).resolve().parent
+project_root = Path(__file__).resolve().parents[1] / "src"
 sys.path.insert(0, str(project_root))
 
-from CacheManager import CacheManager
+from magnetlinker.CacheManager import CacheManager
 
 
 class IsolatedCacheTestCase(unittest.TestCase):

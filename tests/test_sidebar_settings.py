@@ -4,9 +4,9 @@ Test the modern macOS sidebar settings interface.
 Verifies sidebar navigation, dynamic content switching, and overall design patterns.
 """
 
-from MacOSGUIManager import MacOSGUIManager
-from CacheManager import CacheManager
-from APIClient import APIClient
+from magnetlinker.MacOSGUIManager import MacOSGUIManager
+from magnetlinker.CacheManager import CacheManager
+from magnetlinker.APIClient import APIClient
 
 
 def test_sidebar_settings():

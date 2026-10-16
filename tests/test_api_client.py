@@ -7,11 +7,11 @@ from unittest.mock import Mock, patch, MagicMock, mock_open
 from pathlib import Path
 
 # Ensure project root is on sys.path
-project_root = Path(__file__).resolve().parent
+project_root = Path(__file__).resolve().parents[1] / "src"
 sys.path.insert(0, str(project_root))
 
-from APIClient import APIClient
-from CacheManager import CacheManager
+from magnetlinker.APIClient import APIClient
+from magnetlinker.CacheManager import CacheManager
 
 
 class TestAPIClientInitialization(unittest.TestCase):
@@ -76,7 +76,7 @@ class TestAPIClientMagnetLink(unittest.TestCase):
         
         self.client = APIClient(self.mock_cache)
     
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_open_magnet_movie(self, mock_session_class):
         """Test sending movie magnet link."""
         mock_session = Mock()
@@ -99,7 +99,7 @@ class TestAPIClientMagnetLink(unittest.TestCase):
         self.assertEqual(mock_session.post.call_count, 2)
         print("✓ Open magnet movie works")
     
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_open_magnet_series(self, mock_session_class):
         """Test sending series magnet link."""
         mock_session = Mock()
@@ -121,7 +121,7 @@ class TestAPIClientMagnetLink(unittest.TestCase):
         self.assertEqual(mock_session.post.call_count, 2)
         print("✓ Open magnet series works")
     
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_magnet_failed_login(self, mock_session_class):
         """Test magnet link handling with failed login."""
         mock_session = Mock()
@@ -142,7 +142,7 @@ class TestAPIClientMagnetLink(unittest.TestCase):
         self.assertIn("login", str(context.exception).lower())
         print("✓ Magnet failed login handling works")
 
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_magnet_204_login_success(self, mock_session_class):
         """Test magnet login success with 204 response code."""
         mock_session = Mock()
@@ -164,7 +164,7 @@ class TestAPIClientMagnetLink(unittest.TestCase):
         self.assertEqual(mock_session.post.call_count, 2)
         print("✓ Magnet 204 login success works")
     
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_magnet_no_credentials(self, mock_session_class):
         """Test magnet link with missing credentials."""
         self.mock_cache.load_credentials.return_value = (None, None)
@@ -178,7 +178,7 @@ class TestAPIClientMagnetLink(unittest.TestCase):
         self.assertIn("credentials", str(context.exception).lower())
         print("✓ Magnet no credentials handling works")
 
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_open_magnet_with_url_missing_trailing_slash(self, mock_session_class):
         """Test qBittorrent URL missing trailing slash is normalized."""
         self.mock_cache.load_setting.side_effect = lambda key, default: {
@@ -224,7 +224,7 @@ class TestAPIClientTorrentFile(unittest.TestCase):
         self.client = APIClient(self.mock_cache)
     
     @patch('builtins.open', new_callable=mock_open, read_data=b"torrent data")
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_open_torrent_movie(self, mock_session_class, mock_file):
         """Test sending movie torrent file."""
         mock_session = Mock()
@@ -246,7 +246,7 @@ class TestAPIClientTorrentFile(unittest.TestCase):
         print("✓ Open torrent movie works")
     
     @patch('builtins.open', new_callable=mock_open, read_data=b"torrent data")
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_open_torrent_series(self, mock_session_class, mock_file):
         """Test sending series torrent file."""
         mock_session = Mock()
@@ -268,7 +268,7 @@ class TestAPIClientTorrentFile(unittest.TestCase):
         print("✓ Open torrent series works")
     
     @patch('builtins.open', new_callable=mock_open, read_data=b"torrent data")
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_torrent_204_login_success(self, mock_session_class, mock_file):
         """Test torrent file login success with 204 response code."""
         mock_session = Mock()
@@ -288,7 +288,7 @@ class TestAPIClientTorrentFile(unittest.TestCase):
         self.assertEqual(mock_session.post.call_count, 2)
         print("✓ Torrent file 204 login success works")
     
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_torrent_failed_login(self, mock_session_class):
         """Test torrent file handling with failed login."""
         mock_session = Mock()
@@ -307,7 +307,7 @@ class TestAPIClientTorrentFile(unittest.TestCase):
         self.assertIn("login", str(context.exception).lower())
         print("✓ Torrent failed login handling works")
     
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_torrent_no_credentials(self, mock_session_class):
         """Test torrent file with missing credentials."""
         self.mock_cache.load_credentials.return_value = (None, None)
@@ -334,7 +334,7 @@ class TestAPIClientWeb(unittest.TestCase):
         
         self.client = APIClient(self.mock_cache)
     
-    @patch('APIClient.webbrowser.open')
+    @patch('magnetlinker.APIClient.webbrowser.open')
     def test_open_qbittorrent_web(self, mock_browser):
         """Test opening qBittorrent web interface."""
         self.client.open_qbittorrent_web()
@@ -342,7 +342,7 @@ class TestAPIClientWeb(unittest.TestCase):
         mock_browser.assert_called_once_with("http://localhost:8080")
         print("✓ Open qBittorrent web works")
     
-    @patch('APIClient.webbrowser.open')
+    @patch('magnetlinker.APIClient.webbrowser.open')
     def test_open_web_with_custom_url(self, mock_browser):
         """Test opening web with custom URL."""
         self.client.qbittorrent_url = "https://custom.url:9999"
@@ -351,7 +351,7 @@ class TestAPIClientWeb(unittest.TestCase):
         mock_browser.assert_called_once_with("https://custom.url:9999")
         print("✓ Open web with custom URL works")
     
-    @patch('APIClient.webbrowser.open')
+    @patch('magnetlinker.APIClient.webbrowser.open')
     def test_open_web_failure(self, mock_browser):
         """Test web opening failure handling."""
         mock_browser.side_effect = Exception("Browser not available")
@@ -377,7 +377,7 @@ class TestAPIClientNetworkErrors(unittest.TestCase):
         
         self.client = APIClient(self.mock_cache)
     
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_connection_timeout(self, mock_session_class):
         """Test handling connection timeout."""
         mock_session = Mock()
@@ -393,7 +393,7 @@ class TestAPIClientNetworkErrors(unittest.TestCase):
         
         print("✓ Connection timeout handling works")
     
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_http_error_response(self, mock_session_class):
         """Test handling HTTP error responses."""
         mock_session = Mock()
@@ -417,7 +417,7 @@ class TestAPIClientNetworkErrors(unittest.TestCase):
         
         print("✓ HTTP error response handling works")
 
-    @patch('APIClient.requests.get')
+    @patch('magnetlinker.APIClient.requests.get')
     def test_check_connection_no_credentials_success(self, mock_get):
         """Test connection health check without saved credentials."""
         self.mock_cache.load_credentials.return_value = (None, None)
@@ -434,7 +434,7 @@ class TestAPIClientNetworkErrors(unittest.TestCase):
         self.assertEqual(message, "Connection successful")
         print("✓ Connection health check without credentials works")
 
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_check_connection_with_credentials_success(self, mock_session_class):
         """Test connection health check with saved credentials."""
         mock_session = Mock()
@@ -485,7 +485,7 @@ class TestAPIClientPathHandling(unittest.TestCase):
         self.assertEqual(self.client.movies_directory, "/path/to/movies")
         print("✓ Movies directory path works")
     
-    @patch('APIClient.requests.Session')
+    @patch('magnetlinker.APIClient.requests.Session')
     def test_magnet_with_custom_paths(self, mock_session_class):
         """Test magnet sent with correct directory based on type."""
         mock_session = Mock()

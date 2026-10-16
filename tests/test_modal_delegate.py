@@ -2,7 +2,7 @@
 """Test that the SettingsWindowDelegate stops the modal session when the window closes."""
 
 from unittest.mock import Mock
-import MacOSGUIManager as mgr
+import magnetlinker.MacOSGUIManager as mgr
 
 
 def test_delegate_stops_modal():

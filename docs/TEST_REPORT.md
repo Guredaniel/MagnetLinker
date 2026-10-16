@@ -146,11 +146,11 @@ All tests pass successfully. The application is ready with:
 1. **test_crash_fix.py** - Basic initialization tests
 2. **test_comprehensive.py** - 23 core feature tests
 3. **test_ui_integration.py** - 18 UI and integration tests
-4. **run_all_tests.py** - Test suite runner with summary
+4. **tests/run_all_tests.py** - Test suite runner with summary
 
 Run all tests with:
 ```bash
-python3 run_all_tests.py
+python3 tests/run_all_tests.py
 ```
 
 ---

@@ -18,8 +18,8 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any, Optional
 
 if TYPE_CHECKING:
-    from APIClient import APIClient
-    from CacheManager import CacheManager
+    from magnetlinker.APIClient import APIClient
+    from magnetlinker.CacheManager import CacheManager
 
 logger = logging.getLogger(__name__)
 
@@ -370,7 +370,7 @@ class MacOSGUIManager:
             NSImage: The app icon, or None if not found.
         """
         icon_path = None
-        app_dir = Path(__file__).parent
+        app_dir = Path(__file__).parent / "assets"
         for icon_file in ["icon.icns", "icon.png"]:
             potential_path = app_dir / icon_file
             if potential_path.exists():
@@ -463,7 +463,7 @@ class MacOSGUIManager:
         """Create the rumps menu bar application."""
         # Get icon path
         icon_path = None
-        app_dir = Path(__file__).parent
+        app_dir = Path(__file__).parent / "assets"
         for icon_file in ["icon.icns", "icon.png"]:
             potential_path = app_dir / icon_file
             if potential_path.exists():

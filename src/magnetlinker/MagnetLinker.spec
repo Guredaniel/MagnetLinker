@@ -1,11 +1,17 @@
 # -*- mode: python ; coding: utf-8 -*-
+from pathlib import Path
 
+project_root = Path(SPECPATH).resolve().parents[1]
+package_dir = project_root / "src" / "magnetlinker"
 
 a = Analysis(
-    ['MagnetApp.py'],
-    pathex=[],
+    [str(package_dir / "MagnetApp.py")],
+    pathex=[str(project_root / "src")],
     binaries=[],
-    datas=[('icon.png', '.'), ('icon.icns', '.')],
+    datas=[
+        (str(package_dir / "assets" / "icon.png"), "magnetlinker/assets"),
+        (str(package_dir / "assets" / "icon.icns"), "magnetlinker/assets"),
+    ],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -32,7 +38,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['icon.icns'],
+    icon=[str(package_dir / "assets" / "icon.icns")],
 )
 coll = COLLECT(
     exe,
@@ -46,7 +52,7 @@ coll = COLLECT(
 app = BUNDLE(
     coll,
     name='MagnetLinker.app',
-    icon='icon.icns',
+    icon=str(package_dir / "assets" / "icon.icns"),
     bundle_identifier='com.magnetlinker.app',
     plist={
         'CFBundleIdentifier': 'com.magnetlinker.app',

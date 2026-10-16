@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 import requests
 
 if TYPE_CHECKING:
-    from CacheManager import CacheManager
+    from magnetlinker.CacheManager import CacheManager
 
 logger = logging.getLogger(__name__)
 
