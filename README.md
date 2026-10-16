@@ -24,13 +24,26 @@ MagnetLinker is a desktop companion for [qBittorrent](https://www.qbittorrent.or
 
 ## Get the app
 
-There are no published release downloads yet. To download a build produced by GitHub Actions:
+Published versions are listed on the [Releases page](https://github.com/Guredaniel/MagnetLinker/releases). Some releases include downloadable app builds; future tag-triggered releases may contain release notes only.
+
+If a release does not include a download, you can get a temporary build from GitHub Actions:
 
 1. Open the [Actions](https://github.com/Guredaniel/MagnetLinker/actions) page and select a successful Windows or macOS build.
 2. Download the matching artifact (`MagnetLinker-Windows` or `MagnetLinker-macOS`) from the run's **Artifacts** section. You must be signed in to GitHub to download workflow artifacts.
 3. On macOS, open `MagnetLinker.dmg` and move the app to your preferred location.
 
-Artifacts are temporary workflow outputs, not signed installers or permanent releases. They may expire according to GitHub's artifact-retention settings.
+Actions artifacts are temporary workflow outputs, not signed installers or permanent releases. They may expire according to GitHub's artifact-retention settings.
+
+### Publish a release
+
+Push a version tag beginning with `v` to create a GitHub Release with automatically generated notes. This workflow does not build or attach downloads:
+
+```bash
+git tag v1.3
+git push origin v1.3
+```
+
+Use a new tag for each release. You can tag the current commit even when there are no new code changes; GitHub will still publish a release for that tag.
 
 ## Run from source
 
