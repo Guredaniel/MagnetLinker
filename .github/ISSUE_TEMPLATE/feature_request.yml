@@ -1,0 +1,27 @@
+name: Feature request
+description: Suggest an improvement to MagnetLinker.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the use case or friction you are experiencing.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like MagnetLinker to do?
+      description: Describe the behavior you would find useful.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any alternative approaches or workflows you have considered.
+    validations:
+      required: false

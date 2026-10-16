@@ -1,0 +1,50 @@
+name: Bug report
+description: Report a reproducible problem with MagnetLinker.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include passwords, private URLs, IP addresses, magnet links, or files from your application data directory.
+  - type: dropdown
+    id: operating-system
+    attributes:
+      label: Operating system
+      options:
+        - Windows
+        - macOS
+        - Linux/other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: MagnetLinker version or build
+      description: Include the Git commit or Actions run if using a workflow artifact.
+      placeholder: "e.g. commit SHA or workflow run"
+    validations:
+      required: false
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include relevant error messages, but redact private information.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open MagnetLinker
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
