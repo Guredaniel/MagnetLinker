@@ -4,8 +4,8 @@ MagnetLinker is a desktop companion for [qBittorrent](https://www.qbittorrent.or
 
 | Platform | Build |
 | --- | --- |
-| Windows | [![Build MagnetLinker (Windows)](https://github.com/Guredaniel/UpcomingEpisodes/actions/workflows/build-windows.yml/badge.svg)](https://github.com/Guredaniel/UpcomingEpisodes/actions/workflows/build-windows.yml) |
-| macOS | [![Build MagnetLinker (macOS)](https://github.com/Guredaniel/UpcomingEpisodes/actions/workflows/build-macos.yml/badge.svg)](https://github.com/Guredaniel/UpcomingEpisodes/actions/workflows/build-macos.yml) |
+| Windows | [![Build MagnetLinker (Windows)](https://github.com/Guredaniel/MagnetLinker/actions/workflows/build-windows.yml/badge.svg)](https://github.com/Guredaniel/MagnetLinker/actions/workflows/build-windows.yml) |
+| macOS | [![Build MagnetLinker (macOS)](https://github.com/Guredaniel/MagnetLinker/actions/workflows/build-macos.yml/badge.svg)](https://github.com/Guredaniel/MagnetLinker/actions/workflows/build-macos.yml) |
 
 ## Features
 
@@ -26,7 +26,7 @@ MagnetLinker is a desktop companion for [qBittorrent](https://www.qbittorrent.or
 
 There are no published release downloads yet. To download a build produced by GitHub Actions:
 
-1. Open the [Actions](https://github.com/Guredaniel/UpcomingEpisodes/actions) page and select a successful Windows or macOS build.
+1. Open the [Actions](https://github.com/Guredaniel/MagnetLinker/actions) page and select a successful Windows or macOS build.
 2. Download the matching artifact (`MagnetLinker-Windows` or `MagnetLinker-macOS`) from the run's **Artifacts** section. You must be signed in to GitHub to download workflow artifacts.
 3. On macOS, open `MagnetLinker.dmg` and move the app to your preferred location.
 
