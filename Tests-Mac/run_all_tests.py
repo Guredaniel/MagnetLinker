@@ -13,7 +13,7 @@ def run_test_suite(test_file, suite_name):
     print(f"{'='*70}\n")
     
     # run tests with cwd set to project root directory dynamically
-    project_root = Path(__file__).resolve().parent.parent
+    project_root = Path(__file__).resolve().parent
     env = os.environ.copy()
     # ensure project modules are importable
     env_py = env.get("PYTHONPATH", "")
@@ -28,12 +28,12 @@ def run_test_suite(test_file, suite_name):
 def main():
     """Run all test suites."""
     # ensure project root is known
-    project_root = Path(__file__).resolve().parent.parent
+    project_root = Path(__file__).resolve().parent
     print("\n" + "="*70)
     print("  MAGNETLINKER - COMPREHENSIVE TEST SUITE")
     print("="*70)
     
-    # tests are located relative to project root (macOS folder)
+    # Tests are located relative to the project root.
     test_suites = [
         (str(project_root / "Tests-Mac" / "test_comprehensive.py"), "1. Core Features Tests (23 tests)"),
         (str(project_root / "Tests-Mac" / "test_ui_integration.py"), "2. UI & Integration Tests (18 tests)"),

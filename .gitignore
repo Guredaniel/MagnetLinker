@@ -363,3 +363,13 @@ MigrationBackup/
 FodyWeavers.xsd
 .qodo
 .DS_Store
+
+# Python environments and generated files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+build/
+dist/
+.pytest_cache/
+.vscode/

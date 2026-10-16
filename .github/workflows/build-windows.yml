@@ -1,0 +1,42 @@
+name: Build MagnetLinker (Windows)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Build MagnetLinker
+        run: >-
+          python -m PyInstaller --noconfirm --clean --onefile --windowed
+          --name MagnetLinker --icon icon.png
+          --collect-all customtkinter
+          --add-data "icon.png;."
+          MagnetApp.py
+
+      - name: Upload MagnetLinker
+        uses: actions/upload-artifact@v4
+        with:
+          name: MagnetLinker-Windows
+          path: dist/MagnetLinker.exe
+          if-no-files-found: error

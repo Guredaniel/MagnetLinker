@@ -1,4 +1,4 @@
-**MagnetLinker** is a lightweight Windows system tray application that seamlessly integrates with qBittorrent's Web API. It automatically detects magnet links in your clipboard and allows you to quickly categorize downloads as either movies or series, directing them to their respective directories in qBittorrent.
+**MagnetLinker** is a lightweight desktop application for Windows and macOS that seamlessly integrates with qBittorrent's Web API. It automatically detects magnet links in your clipboard and allows you to quickly categorize downloads as either movies or series, directing them to their respective directories in qBittorrent. It runs in the Windows system tray or the macOS menu bar.
 
 Key Features:
 

@@ -1,0 +1,44 @@
+name: Build MagnetLinker (macOS)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements-macos.txt
+
+      - name: Build MagnetLinker
+        run: >-
+          python -m PyInstaller --noconfirm --clean
+          --distpath dist --workpath build MagnetLinker.spec
+
+      - name: Create DMG
+        run: hdiutil create -volname MagnetLinker -srcfolder dist/MagnetLinker.app -ov -format UDZO dist/MagnetLinker.dmg
+
+      - name: Upload MagnetLinker
+        uses: actions/upload-artifact@v4
+        with:
+          name: MagnetLinker-macOS
+          path: |
+            dist/MagnetLinker.app
+            dist/MagnetLinker.dmg
+          if-no-files-found: error
